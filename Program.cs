@@ -1,3 +1,8 @@
+using IntegraBrasilAPI.Interfaces;
+using IntegraBrasilAPI.Mappings;
+using IntegraBrasilAPI.Rest;
+using IntegraBrasilAPI.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton<IEnderecoService, EnderocoService>();
+//builder.Services.AddSingleton<IBancoService, BancoService>();
+builder.Services.AddSingleton<IBrasilApi, BrasilApiRest>();
+
+builder.Services.AddAutoMapper(typeof(EnderecoMapping));
 
 var app = builder.Build();
 
